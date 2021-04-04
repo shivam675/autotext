@@ -38,7 +38,7 @@
                       <!-- <a href="#" onclick="$('#signOutBtn').click()" class="nav-link">Logout</a> -->
                       <!-- <form style='display: none;' method="post" action="{% url 'logoutuser' %}"> -->
                         <a role="button" href="{% url 'logoutuser' %}" class="btn btn-outline-danger">Logout</a>  
-                        <!-- {% csrf_token %} -->
+                        {% csrf_token %}
                           <!-- <button id="signOutBtn" type="submit">Logout</button> -->
                       </form>
                   <!-- </li> -->
@@ -47,8 +47,9 @@
                       Dropdown
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                      <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                      <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                      <li><a class="dropdown-item" href="{% url 'currentmsgs' %}">Currnet Msgs</a></li>
+                      <li><a class="dropdown-item" href="{% url 'createmsgs' %}">Create Msgs</a></li>
+                      <li><a class="dropdown-item" href="{% url 'completedmsgs' %}">Completed Msgs</a></li>
                     </ul>
                   </div>
               {% else %}

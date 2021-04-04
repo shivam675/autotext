@@ -22,5 +22,13 @@ urlpatterns = [
     path('', views.home, name = 'home'),
     path('signupuser/', views.signupuser, name = 'signupuser'),
     path('loginuser/', views.loginuser, name = 'loginuser'),
-    path('logoutuser/', views.logoutuser, name = 'logoutuser'),  
+    path('logoutuser/', views.logoutuser, name = 'logoutuser'),
+
+
+    path('create_msg/', views.createmsgs, name = 'createmsgs'),
+    path('current/', views.currentmsgs, name='currentmsgs'),
+    path('completed/', views.completedmsgs, name='completedmsgs'),
+    path('msg/<int:msg_pk>', views.viewmsgs, name='viewmsgs'),
+    path('msg/<int:msg_pk>/complete', views.completemsgs, name='completemsgs'),
+    path('msg/<int:msg_pk>/delete', views.deletemsgs, name='deletemsgs'),
 ]

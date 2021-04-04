@@ -1,0 +1,30 @@
+{% extends "reminders/base_two.html" %}
+
+{% block content %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+            {% if todos %}
+                 <h1>{{ msgs.count }} Current Todo{{ msgs.count|pluralize }}</h1>
+            {% else %}
+                           <h1>Current Msgs</h1>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+        {% if todos %}
+            <div class="list-group">
+                {% for msg in msgs %}
+                    <a href="{% url 'viewmsgs' msg.id %}" class="list-group-item list-group-item-action{% if msg.important %} list-group-item-danger{% endif %}"><b>{{ msgs.title }}</b>{% if msgs.message_to_send %} - {{ todo.message_to_send|truncatechars:30 }}{% endif %}</a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center">
+                <h2>Looks like you don't have any todos! Nice work.</h2>
+            <br>
+            <a role="button" class="btn btn-outline-primary" href="{% url 'createmsgs' %}">New Msgs</a>
+            </div>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}
