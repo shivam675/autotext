@@ -20,4 +20,7 @@ from reminders import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name = 'home'),
+    path('signupuser/', views.signupuser, name = 'signupuser'),
+    path('loginuser/', views.loginuser, name = 'loginuser'),
+    path('logoutuser/', views.logoutuser, name = 'logoutuser'),  
 ]
