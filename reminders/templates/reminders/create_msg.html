@@ -1,6 +1,12 @@
 {% extends "reminders/base_two.html" %}
 
 {% block content %}
+{% load static %}
+<style>
+    body {
+      background-image: url('{% static 'images/colorful.jpg' %}');
+    }
+</style>
     <div class="row justify-content-center mt-5">
         <div class="col-md-5">
             <h2>New MSG</h2>
@@ -21,17 +27,20 @@
                 </div>
                 <div class="form-group">
                     <label for="message_to_send">Message to send</label>
-                    <textarea name="message_to_send" class="form-control" id="message_to_send" ></textarea>
+                    <textarea name="message_to_send"  rows="2" class="form-control" id="message_to_send" ></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="number">Number</label>
-                    <textarea name="number" class="form-control" id="number" ></textarea>
+                    <label for="number">Phone Number</label>
+                    <textarea name="number" rows="1" class="form-control" id="number" ></textarea>
                 </div>
+                <br>
+
                 <div class="form-group form-check">
                     <input type="checkbox" name="important" class="form-check-input" id="important">
                     <label class="form-check-label" for="important">Important</label>
                 </div>
+                <br>
                 <button type="submit" class="btn btn-outline-primary">Save</button>
             </form>
         </div>

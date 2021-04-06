@@ -1,6 +1,15 @@
 {% extends "reminders/base_two.html" %}
+{% load static %}
 
 {% block content %}
+
+
+<style>
+    body {
+      background-image: url('{% static 'images/colorful.jpg' %}');
+    }
+</style>
+
 <div class="row justify-content-center mt-5">
     <div class="col-md-5">
         <h2>New Msgs</h2>
@@ -18,21 +27,32 @@
                     <label for="title">Title</label>
                     <input type="text" name="title" class="form-control" id="title" value="{{ msg.title }}" required>
                 </div>
+                <br>
+                
                 <div class="form-group">
-                    <label for="message">message_to_send</label>
+                    <label for="message">Message</label>
                     <textarea name="message" rows="2" class="form-control" id="message" >{{ msg.message }}</textarea>
                 </div>
-
+                <br>
                 <div class="form-group">
                     <label for="number">Phone Number</label>
-                    <textarea name="number" rows="2" class="form-control" id="number" >{{ msg.number }}</textarea>
+                    <textarea name="number" rows="1" class="form-control" id="number" >{{ msg.number }}</textarea>
                 </div>
-
+                <br>
                 <div class="form-group form-check">
                     <input type="checkbox" name="important" class="form-check-input" id="important" {% if msg.important %}checked{% endif %}>
                     <label class="form-check-label" for="important">Important</label>
                 </div>
+                <br>
                 <button type="submit" class="btn btn-primary">Save</button>
+                {% if msg.datecompleted is None %}
+            {% csrf_token %}
+            <a role="button" href="{% url 'completemsgs' msg.id %}" class="btn btn-success">Complete</a>
+            <!-- <button id="complete" type="submit">Complete</button> -->
+    {% endif %}
+        {% csrf_token %}
+        <a role="button" href="{% url 'deletemsgs' msg.id %}" class="btn btn-danger">Delete</a>
+        <!-- <button id="delete" type="submit">Delete</button> -->
                 <!-- #<button type="button" class="btn btn-success" onclick="$('#complete').click()">Complete</button>
                 <button type="button" class="btn btn-danger" onclick="$('delete').click()">Delete</button> -->
             </form>
@@ -40,17 +60,6 @@
     </div>
 </div>
 
-    {% if msg.datecompleted is None %}
-        <form method="POST">
-            {% csrf_token %}
-            <a role="button" href="{% url 'completemsgs' msg.id %}" class="btn btn-outline-success">Complete</a>
-            <!-- <button id="complete" type="submit">Complete</button> -->
-        </form>
-    {% endif %}
-    <form method="POST">
-        {% csrf_token %}
-        <a role="button" href="{% url 'deletemsgs' msg.id %}" class="btn btn-outline-success">Delete</a>
-        <!-- <button id="delete" type="submit">Delete</button> -->
-    </form>
+    
 
 {% endblock %}
