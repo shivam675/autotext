@@ -98,6 +98,7 @@ def viewmsgs(request, msg_pk):
         try:
             form = TimetableForm(request.POST, instance=msg)
             form.save()
+            # print('saved')
             return redirect('currentmsgs')
         except ValueError:
             return render(request, 'reminders/view_msgs.html', {'msg':msg, 'form':form, 'error':'Bad info'})

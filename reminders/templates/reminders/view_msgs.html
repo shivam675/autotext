@@ -22,6 +22,12 @@
                     <label for="message">message_to_send</label>
                     <textarea name="message" rows="2" class="form-control" id="message" >{{ msg.message }}</textarea>
                 </div>
+
+                <div class="form-group">
+                    <label for="number">Phone Number</label>
+                    <textarea name="number" rows="2" class="form-control" id="number" >{{ msg.number }}</textarea>
+                </div>
+
                 <div class="form-group form-check">
                     <input type="checkbox" name="important" class="form-check-input" id="important" {% if msg.important %}checked{% endif %}>
                     <label class="form-check-label" for="important">Important</label>
