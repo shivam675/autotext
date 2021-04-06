@@ -60,7 +60,7 @@ def logoutuser(request):
 
 
 
-@login_required
+@login_required(login_url='loginuser')
 def createmsgs(request):
     if request.method == 'GET':
         return render(request, 'reminders/create_msg.html', {'form':TimetableForm()})
@@ -76,19 +76,19 @@ def createmsgs(request):
 
 
 
-@login_required
+@login_required(login_url='loginuser')
 def currentmsgs(request):
     msg = Automate_text.objects.filter(user=request.user, datecompleted__isnull=True)
     return render(request, 'reminders/current_msg.html', {'msgs':msg})
 
 
 
-@login_required
+@login_required(login_url='loginuser')
 def completedmsgs(request):
     msg = Automate_text.objects.filter(user=request.user, datecompleted__isnull=False).order_by('-datecompleted')
     return render(request, 'reminders/complete_msg.html', {'msgs':msg})
 
-@login_required
+@login_required(login_url='loginuser')
 def viewmsgs(request, msg_pk):
     msg = get_object_or_404(Automate_text, pk=msg_pk, user=request.user)
     if request.method == 'GET':
@@ -103,17 +103,17 @@ def viewmsgs(request, msg_pk):
         except ValueError:
             return render(request, 'reminders/view_msgs.html', {'msg':msg, 'form':form, 'error':'Bad info'})
 
-@login_required
+@login_required(login_url='loginuser')
 def completemsgs(request, msg_pk):
     msg = get_object_or_404(Automate_text, pk=msg_pk, user=request.user)
-    if request.method == 'POST':
-        msg.datecompleted = timezone.now()
-        msg.save()
-        return redirect('currentmsgs')
+    # if request.method == 'POST':
+    msg.datecompleted = timezone.now()
+    msg.save()
+    return redirect('currentmsgs')
 
-@login_required
+@login_required(login_url='loginuser')
 def deletemsgs(request, msg_pk):
     msg = get_object_or_404(Automate_text, pk=msg_pk, user=request.user)
-    if request.method == 'POST':
-        msg.delete()
-        return redirect('currentmsgs')
+    # if request.method == 'POST':
+    msg.delete()
+    return redirect('currentmsgs')
