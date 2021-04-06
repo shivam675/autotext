@@ -93,26 +93,26 @@ def viewmsgs(request, msg_pk):
     msg = get_object_or_404(Automate_text, pk=msg_pk, user=request.user)
     if request.method == 'GET':
         form = TimetableForm(instance=msg)
-        return render(request, 'reminders/view_msgs.html', {'msgs':msg, 'form':form})
+        return render(request, 'reminders/view_msgs.html', {'msg':msg, 'form':form})
     else:
         try:
             form = TimetableForm(request.POST, instance=msg)
             form.save()
             return redirect('currentmsgs')
         except ValueError:
-            return render(request, 'reminders/view_msgs.html', {'msgs':msg, 'form':form, 'error':'Bad info'})
+            return render(request, 'reminders/view_msgs.html', {'msg':msg, 'form':form, 'error':'Bad info'})
 
 @login_required
 def completemsgs(request, msg_pk):
-    todo = get_object_or_404(Automate_text, pk=msg_pk, user=request.user)
+    msg = get_object_or_404(Automate_text, pk=msg_pk, user=request.user)
     if request.method == 'POST':
-        todo.datecompleted = timezone.now()
-        todo.save()
+        msg.datecompleted = timezone.now()
+        msg.save()
         return redirect('currentmsgs')
 
 @login_required
 def deletemsgs(request, msg_pk):
-    todo = get_object_or_404(Automate_text, pk=msg_pk, user=request.user)
+    msg = get_object_or_404(Automate_text, pk=msg_pk, user=request.user)
     if request.method == 'POST':
-        todo.delete()
+        msg.delete()
         return redirect('currentmsgs')

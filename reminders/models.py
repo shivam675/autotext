@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 
 class Automate_text(models.Model):
     title = models.CharField(max_length=100)
-    message_to_send = models.TextField(blank=True)
-    number = models.BigIntegerField(blank=False)
+    message = models.TextField(blank=True)
+    number = models.IntegerField(blank=False)
     created = models.DateTimeField(auto_now_add=True)
     datecompleted = models.DateTimeField(null=True, blank=True)
     important = models.BooleanField(default=False)
