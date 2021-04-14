@@ -1,4 +1,17 @@
 {% extends 'reminders/base_two.html' %}
 {% block content %}
-<h1>Yello</h1>
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-10">
+        {% if user.is_authenticated %}
+        <h1>Dashboard</h1>
+        {% else %}
+        <h2>Login to get started</h2>
+
+        {% endif %}
+    </div>
+</div>
+
+
+
 {% endblock %}
